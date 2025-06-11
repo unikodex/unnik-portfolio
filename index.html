@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unnikrishnan T V | Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #fdf6f0; /* light mode */
+      color: #1e293b; /* slate-800 */
+    }
+    body.dark {
+      background-color: #0d1117;
+      color: #e6edf3;
+    }
+  </style>
+</head>
+<body class="font-sans transition-colors duration-300">
+  <!-- Header -->
+  <header class="fixed top-0 w-full bg-white dark:bg-[#0d1117] dark:text-white z-50 shadow">
+    <div class="max-w-5xl mx-auto flex justify-between items-center px-6 py-4">
+      <h1 class="text-lg font-bold text-rose-600 dark:text-white">Unnikrishnan T V</h1>
+      <nav class="space-x-4 hidden sm:block text-sm">
+        <a href="#about" class="hover:text-rose-500 dark:hover:text-indigo-400">About</a>
+        <a href="#projects" class="hover:text-rose-500 dark:hover:text-indigo-400">Projects</a>
+        <a href="#certifications" class="hover:text-rose-500 dark:hover:text-indigo-400">Certifications</a>
+        <a href="#contact" class="hover:text-rose-500 dark:hover:text-indigo-400">Contact</a>
+      </nav>
+      <button id="themeToggle" class="ml-4 p-2 bg-gray-200 dark:bg-gray-800 rounded-full text-yellow-600 dark:text-yellow-300 hover:bg-gray-300 dark:hover:bg-gray-700 transition">☀️</button>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="max-w-4xl mx-auto px-6 pt-32 pb-20 space-y-20">
+    
+    <!-- Hero/About -->
+    <section id="about" class="flex flex-col items-center text-center" data-aos="fade-up">
+      <img src="C:\Users\smash\Pictures\Screenshots\Screenshot 2025-06-10 145900.png"  alt="Unnikrishnan" class="w-30 h-32 rounded-full mb-6 border-4 border-rose-300 dark:border-none" />
+      <h1 class="text-4xl font-bold text-blue-800 dark:text-white">Hi, I'm Unnikrishnan T V</h1>
+      <p class="text-rose-600 dark:text-indigo-400 text-lg mt-2">Data Science Student • Python Developer</p>
+      <p class="max-w-xl text-base mt-4 text-slate-700 dark:text-gray-400">
+        I'm a BCA Data Science student at Amrita University, blending data, AI, and code to build creative solutions. I love bringing ideas to life through smart, visual applications.
+      </p>
+      <a href="#contact" class="mt-6 inline-block bg-rose-500 hover:bg-rose-600 text-white font-medium py-2 px-5 rounded-lg transition">Get in Touch</a>
+    </section>
+
+    <!-- Skills -->
+    <section data-aos="fade-up">
+      <h2 class="text-2xl font-bold text-rose-600 dark:text-indigo-400 mb-2">Skills</h2>
+      <p><strong>Tech:</strong> Machine Learning, Data Cleaning, Data Mining, DBMS, Visualization</p>
+      <p><strong>Tools:</strong> Python, Pandas, SQL, C/C++, HTML/CSS, Tableau, Power BI, Google Cloud</p>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" data-aos="fade-up">
+      <h2 class="text-2xl font-bold text-rose-600 dark:text-indigo-400 mb-4">Projects</h2>
+      <div class="space-y-6">
+        <div class="bg-amber-100 border-l-4 border-rose-300 dark:bg-[#161b22] dark:border-none p-4 rounded-lg shadow-md hover:shadow-xl transition">
+          <h3 class="text-xl text-blue-800 dark:text-blue-400 font-semibold">Gest-ure-Vis</h3>
+          <p>A gesture-controlled Windows tool using Python (Mediapipe + OpenCV). Enables system actions like exiting apps or hibernating via hand gestures. Achieved 100% accuracy.</p>
+        </div>
+        <div class="bg-amber-100 border-l-4 border-rose-300 dark:bg-[#161b22] dark:border-none p-4 rounded-lg shadow-md hover:shadow-xl transition">
+          <h3 class="text-xl text-blue-800 dark:text-blue-400 font-semibold">Cryck Eleven (IPL Predictor)</h3>
+          <p>A cricket prediction app using Pandas and Power BI. Shows top T20 players based on filters. Achieved 80% accuracy in real-world IPL match predictions.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Achievements -->
+    <section data-aos="fade-up">
+      <h2 class="text-2xl font-bold text-rose-600 dark:text-indigo-400 mb-2">Achievements</h2>
+      <ul class="list-disc pl-5 space-y-1">
+        <li>Cracked password test at Bi0s Kali Linux Workshop (Top 70%)</li>
+        <li>3-Star Python & SQL on HackerRank</li>
+        <li>Power BI + AI workshop with Office Masters</li>
+      </ul>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certifications" data-aos="fade-up">
+      <h2 class="text-2xl font-bold text-rose-600 dark:text-indigo-400 mb-2">Certifications</h2>
+      <ul class="list-disc pl-5 space-y-1">
+        <li>Intro to AI – Infosys Springboard (June 2025)</li>
+        <li>Computer Vision – Infosys Springboard (June 2025)</li>
+        <li>Power BI with AI (Jan 2025)</li>
+        <li>Data Science with Python – Simplilearn (Apr 2024)</li>
+        <li>CS50 Web Programming – EdX (Jan 2024)</li>
+        <li>Blockchain Guide – Codies Alert (Jan 2024)</li>
+        <li>Python Essentials 1 – Cisco (Nov 2023)</li>
+      </ul>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" data-aos="fade-up">
+      <h2 class="text-2xl font-bold text-rose-600 dark:text-indigo-400 mb-2">Contact</h2>
+      <p>📧 <a href="mailto:unnik010905@gmail.com" class="text-rose-600 dark:text-blue-400 hover:underline">unnik010905@gmail.com</a></p>
+      <p>📞 <a href="tel:+919995218295" class="text-rose-600 dark:text-blue-400 hover:underline">+91 99952 18295</a></p>
+      <p>🔗 <a href="https://linkedin.com/in/unnikrishnan-thiruvara-variyath-903521369/" target="_blank" class="text-rose-600 dark:text-blue-400 hover:underline">LinkedIn Profile</a></p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center text-gray-500 dark:text-gray-400 text-sm py-6">
+    © 2025 Unnikrishnan T V. Built with ❤️ using Tailwind CSS.
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000 });
+
+    const toggleBtn = document.getElementById("themeToggle");
+    const html = document.documentElement;
+
+    function setTheme(isDark) {
+      html.classList.toggle("dark", isDark);
+      document.body.classList.toggle("dark", isDark);
+      toggleBtn.textContent = isDark ? "🌙" : "☀️";
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    }
+
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") setTheme(true);
+
+    toggleBtn.addEventListener("click", () => {
+      const isDark = !html.classList.contains("dark");
+      setTheme(isDark);
+    });
+  </script>
+</body>
+</html>
