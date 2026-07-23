@@ -215,18 +215,20 @@
         }
         .hero-profile-text { text-align: right; line-height: 1.2; }
         .hero-profile-text p { font-weight: 500; font-size: 1.1rem; }
-        .hero-profile-text h3 { color: var(--accent); font-size: 1.8rem; margin-top: 0.2rem; }
+        .morph-container { position: relative; }
+        .invisible-placeholder { visibility: hidden; color: var(--accent); font-size: 1.8rem; font-weight: 500; font-family: var(--font-display); white-space: nowrap; display: inline-block; }
+        .morph-default { position: absolute; inset: 0; transition: all 0.4s ease; color: var(--accent); font-size: 1.8rem; font-weight: 500; font-family: var(--font-display); white-space: nowrap; display: inline-block; user-select: none; }
+        .morph-hover { position: absolute; inset: 0; transition: all 0.4s ease; font-family: 'Batman', sans-serif; letter-spacing: 2px; color: var(--text-main); font-size: 2.2rem; margin-top: 0.2rem; white-space: nowrap; display: inline-block; user-select: none; opacity: 0; filter: blur(8px); }
         
-        .name-hover { display: none; font-family: 'Batman', sans-serif; letter-spacing: 2px; color: var(--text-main); font-size: 2.2rem !important; margin-top: 0.5rem !important; }
-        .hero-profile-widget:hover .name-default { display: none; }
-        .hero-profile-widget:hover .name-hover { display: block; }
+        .hero-profile-widget:hover .morph-default { opacity: 0; filter: blur(8px); }
+        .hero-profile-widget:hover .morph-hover { opacity: 1; filter: blur(0px); }
         
         .hero-profile-image-container { display: flex; align-items: flex-start; gap: 1rem; margin-top: 0.5rem; }
         .dashed-arrow { width: 60px; height: 60px; margin-top: -10px; }
         
         .profile-img-wrapper {
             position: relative;
-            width: 130px; height: 130px;
+            width: 112px; height: 112px;
             border-radius: 50%;
             box-shadow: 0 0 30px rgba(255, 77, 0, 0.15);
             --x: 50%;
@@ -366,8 +368,20 @@
             <div class="hero-profile-widget reveal">
                 <div class="hero-profile-text">
                     <p>Hi! I Am</p>
-                    <h3 class="name-default">Unnikrishnan.</h3>
-                    <h3 class="name-hover">BATMAN.</h3>
+                    <div style="position: relative;">
+                        <svg style="position: absolute; width: 0; height: 0;" aria-hidden="true" focusable="false">
+                            <defs>
+                                <filter id="gooey-hover-morph">
+                                    <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 255 -140"></feColorMatrix>
+                                </filter>
+                            </defs>
+                        </svg>
+                        <div style="filter:url(#gooey-hover-morph)" class="morph-container">
+                            <span class="invisible-placeholder" aria-hidden="true">Unnikrishnan.</span>
+                            <span class="morph-default">Unnikrishnan.</span>
+                            <span class="morph-hover">BATMAN.</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="hero-profile-image-container">
                     <svg class="dashed-arrow" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
