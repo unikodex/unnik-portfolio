@@ -226,7 +226,7 @@
         
         .profile-img-wrapper {
             position: relative;
-            width: 100px; height: 100px;
+            width: 112px; height: 112px;
             border-radius: 50%;
             box-shadow: 0 0 30px rgba(255, 77, 0, 0.15);
             --x: 50%;
@@ -250,13 +250,14 @@
             pointer-events: none;
         }
         .profile-img-wrapper:hover .img-hover {
-            clip-path: circle(35px at var(--x) var(--y));
+            clip-path: circle(45% at var(--x) var(--y));
         }
         
         @media (max-width: 768px) {
             .hero-profile-widget { position: relative; bottom: auto; right: auto; align-items: flex-start; margin-top: 4rem; }
             .hero-profile-text { text-align: left; }
             .dashed-arrow { transform: scaleX(-1); }
+            .profile-img-wrapper { width: 80px; height: 80px; }
         }
 
         /* Section Headers */
