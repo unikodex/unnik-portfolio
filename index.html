@@ -229,6 +229,9 @@
             width: 100px; height: 100px;
             border-radius: 50%;
             box-shadow: 0 0 30px rgba(255, 77, 0, 0.15);
+            --x: 50%;
+            --y: 50%;
+            cursor: crosshair;
         }
         .profile-img {
             width: 100%; height: 100%;
@@ -237,11 +240,18 @@
             border: 2px solid var(--border-color);
             position: absolute;
             top: 0; left: 0;
-            transition: opacity 0.3s ease;
         }
-        .img-hover { opacity: 0; }
-        .hero-profile-widget:hover .img-default { opacity: 0; }
-        .hero-profile-widget:hover .img-hover { opacity: 1; }
+        .img-default { z-index: 1; }
+        .img-hover {
+            z-index: 2;
+            opacity: 1;
+            clip-path: circle(0px at var(--x) var(--y));
+            transition: clip-path 0.3s ease;
+            pointer-events: none;
+        }
+        .profile-img-wrapper:hover .img-hover {
+            clip-path: circle(35px at var(--x) var(--y));
+        }
         
         @media (max-width: 768px) {
             .hero-profile-widget { position: relative; bottom: auto; right: auto; align-items: flex-start; margin-top: 4rem; }
@@ -544,6 +554,36 @@
                 ease: "power3.out"
             });
         });
+
+        // Profile Image Spotlight Effect
+        const profileWrapper = document.querySelector('.profile-img-wrapper');
+        const imgHover = document.querySelector('.img-hover');
+        
+        if (profileWrapper && imgHover) {
+            profileWrapper.addEventListener('mousemove', (e) => {
+                const rect = profileWrapper.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                profileWrapper.style.setProperty('--x', `${x}px`);
+                profileWrapper.style.setProperty('--y', `${y}px`);
+                
+                // Disable transition during movement for instant tracking
+                imgHover.style.transition = 'none';
+            });
+
+            profileWrapper.addEventListener('mouseleave', () => {
+                // Restore center and smooth exit transition
+                profileWrapper.style.setProperty('--x', `50%`);
+                profileWrapper.style.setProperty('--y', `50%`);
+                imgHover.style.transition = 'clip-path 0.3s ease';
+            });
+            
+            profileWrapper.addEventListener('mouseenter', () => {
+                 // Smooth entrance transition before mousemove takes over
+                 imgHover.style.transition = 'clip-path 0.3s ease';
+            });
+        }
     </script>
 </body>
 </html>
