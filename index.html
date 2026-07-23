@@ -3,32 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unnikrishnan Thiruvara Variyath - AI & Backend Developer</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;500&display=swap');
+    <title>Unnikrishnan T V - Backend & AI Developer</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Syne:wght@700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
+    <style>
         :root {
-            --bg-color: #f8fafc;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --accent-1: #3b82f6;
-            --accent-2: #8b5cf6;
-            --card-bg: rgba(255, 255, 255, 0.6);
-            --card-border: rgba(255, 255, 255, 0.4);
-            --glow: rgba(59, 130, 246, 0.3);
-            --shutter-bg: #e2e8f0;
+            /* Light Theme (Default) */
+            --bg-color: #fffcf3;
+            --text-main: #111111;
+            --text-muted: #555555;
+            --accent: #ff4d00;
+            --nav-bg: rgba(255, 252, 243, 0.8);
+            --card-bg: rgba(0, 0, 0, 0.03);
+            --border-color: rgba(0, 0, 0, 0.1);
+            
+            /* Fonts */
+            --font-body: 'Poppins', sans-serif;
+            --font-display: 'Syne', sans-serif;
+            --font-tech: 'Space Grotesk', sans-serif;
         }
 
-        body.dark-theme {
-            --bg-color: #020617;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent-1: #60a5fa;
-            --accent-2: #a78bfa;
-            --card-bg: rgba(15, 23, 42, 0.6);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --glow: rgba(96, 165, 250, 0.15);
-            --shutter-bg: #0f172a;
+        /* Dark Theme */
+        body.dark-mode {
+            --bg-color: #0a0a0a;
+            --text-main: #ffffff;
+            --text-muted: #aaaaaa;
+            --nav-bg: rgba(10, 10, 10, 0.8);
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
         }
 
         * {
@@ -37,522 +43,338 @@
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
-            overflow-x: hidden;
-            transition: background-color 0.5s ease, color 0.5s ease;
+            font-family: var(--font-body);
             line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        h1, h2, h3, h4, .outfit {
-            font-family: 'Outfit', sans-serif;
-        }
-
-        /* Ambient Glow Background */
-        .ambient-glow {
+        /* Noise overlay for texture */
+        .noise-bg {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            width: 60vw;
-            height: 60vw;
-            max-width: 800px;
-            max-height: 800px;
-            transform: translate(-50%, -50%);
-            background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
-            filter: blur(80px);
-            z-index: -1;
+            top: 0; left: 0; right: 0; bottom: 0;
             pointer-events: none;
-            transition: background 0.5s ease;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
+        body.dark-mode .noise-bg { opacity: 0.08; }
 
-        /* Nav & Theme Toggle */
+        /* Typography */
+        h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; }
+        .text-accent { color: var(--accent); }
+        .tech-text { font-family: var(--font-tech); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Navigation */
         nav {
             position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1.5rem 3rem;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 100;
+            padding: 0.75rem 2rem;
+            background: var(--nav-bg);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--card-border);
+            border-radius: 100px;
+            border: 1px solid var(--border-color);
+            z-index: 100;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
-
+        
         .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(to right, var(--accent-1), var(--accent-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -1px;
+            font-family: var(--font-tech);
+            font-weight: 700;
+            font-size: 1.2rem;
             text-decoration: none;
+            color: var(--text-main);
         }
 
         .nav-links {
             display: flex;
             gap: 2rem;
-            align-items: center;
+            list-style: none;
         }
-
         .nav-links a {
-            color: var(--text-main);
             text-decoration: none;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 600;
-            transition: color 0.3s ease;
-            font-size: 1.05rem;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-1);
-        }
-
-        .theme-toggle {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
             color: var(--text-main);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            cursor: pointer;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
         }
+        .nav-links a::after {
+            content: ''; position: absolute;
+            left: 0; bottom: -4px; width: 0%; height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after { width: 100%; }
 
-        .theme-toggle:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px var(--glow);
+        .nav-actions { display: flex; align-items: center; gap: 1rem; }
+        
+        .theme-toggle {
+            background: none; border: none; cursor: pointer;
+            color: var(--text-main);
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            transition: background 0.3s;
         }
+        .theme-toggle:hover { background: var(--card-bg); }
+
+        .connect-btn {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 0.6rem 1.5rem;
+            border-radius: 100px;
+            font-family: var(--font-tech);
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .connect-btn::before {
+            content: ''; position: absolute; inset: 0;
+            background: var(--accent);
+            z-index: -1;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        .connect-btn:hover { color: #fff; border-color: var(--accent); }
+        .connect-btn:hover::before { transform: translateY(0); }
 
         /* Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
-            padding-top: 6rem;
         }
+        section { padding: 8rem 0 4rem; }
 
-        /* Hero Section (3D) */
-        section {
-            padding: 4rem 0;
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 120px;
+            position: relative;
+        }
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 7rem);
+            letter-spacing: -2px;
+            margin-bottom: 1.5rem;
+        }
+        .hero p.subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--text-muted);
+            max-width: 700px;
+            margin-bottom: 3rem;
         }
         
-        .hero {
-            min-height: 85vh;
+        .social-row { display: flex; gap: 1rem; }
+        .social-btn {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            display: flex; justify-content: center; align-items: center;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+        }
+        .social-btn:hover {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Profile Widget */
+        .hero-profile-widget {
+            position: absolute;
+            bottom: 4rem;
+            right: 4rem;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            perspective: 1000px; /* For 3D */
+            align-items: flex-end;
+            gap: 0.5rem;
+        }
+        .hero-profile-text { text-align: right; line-height: 1.2; }
+        .hero-profile-text p { font-weight: 500; font-size: 1.1rem; }
+        .hero-profile-text h3 { color: var(--accent); font-size: 1.8rem; margin-top: 0.2rem; }
+        .hero-profile-image-container { display: flex; align-items: flex-start; gap: 1rem; margin-top: 0.5rem; }
+        .dashed-arrow { width: 60px; height: 60px; margin-top: -10px; }
+        .profile-img {
+            width: 100px; height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 0 30px rgba(255, 77, 0, 0.15);
+        }
+        @media (max-width: 768px) {
+            .hero-profile-widget { position: relative; bottom: auto; right: auto; align-items: flex-start; margin-top: 4rem; }
+            .hero-profile-text { text-align: left; }
+            .dashed-arrow { transform: scaleX(-1); }
         }
 
-        .hero-content {
-            transform-style: preserve-3d;
-            transition: transform 0.1s ease-out;
+        /* Section Headers */
+        .section-header {
+            display: flex; align-items: baseline; gap: 1rem;
+            margin-bottom: 4rem;
         }
-
-        .hero h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            transform: translateZ(50px);
-        }
-
-        .hero h2 {
-            font-size: clamp(1.5rem, 3vw, 2.5rem);
-            color: var(--text-muted);
-            font-weight: 400;
-            transform: translateZ(30px);
-            margin-bottom: 2.5rem;
-        }
-        
-        .contact-links {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            transform: translateZ(40px);
-        }
-
-        .contact-links a {
-            color: var(--text-main);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(5px);
-        }
-
-        .contact-links a:hover {
-            box-shadow: 0 0 20px var(--glow);
-            border-color: var(--accent-1);
-            transform: translateY(-2px);
-        }
-
-        /* Glassmorphism Cards */
-        .glass-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .glass-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px var(--glow);
-            border-color: var(--accent-1);
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 3rem;
-            text-align: center;
-            background: linear-gradient(to right, var(--accent-1), var(--accent-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .section-header h2 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        .section-header .line {
+            flex-grow: 1; height: 1px; background: var(--border-color);
         }
 
         /* Grid Layouts */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; gap: 2rem; } }
 
-        /* Skills specific */
-        .skills-category {
-            margin-bottom: 1.5rem;
-        }
-        .skills-category:last-child {
-            margin-bottom: 0;
-        }
-        .skills-category h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: var(--text-main);
-            border-bottom: 1px solid var(--card-border);
-            padding-bottom: 0.5rem;
-        }
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-        }
-        .tag {
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--accent-1);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            transition: all 0.3s ease;
-            cursor: default;
-        }
-        .tag:hover {
-            background: var(--accent-1);
-            color: #fff;
-            transform: scale(1.05);
-            box-shadow: 0 0 15px var(--glow);
-        }
-
-        /* Timeline / Experience */
-        .timeline-item {
-            position: relative;
-            padding-left: 2rem;
-            border-left: 2px solid rgba(59, 130, 246, 0.3);
-            margin-bottom: 2rem;
-        }
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -8px;
-            top: 0;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: var(--accent-1);
-            box-shadow: 0 0 10px var(--accent-1);
-            transition: transform 0.3s ease;
-        }
-        .timeline-item:hover::before {
-            transform: scale(1.5);
-            background: var(--accent-2);
-            box-shadow: 0 0 15px var(--accent-2);
-        }
-        .timeline-date {
-            font-size: 0.9rem;
-            color: var(--accent-2);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-        .timeline-item h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.25rem;
-            font-family: 'Outfit', sans-serif;
-        }
-        .timeline-item h4 {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-            font-weight: 400;
-        }
-        .timeline-item ul {
-            list-style-type: none;
-        }
-        .timeline-item ul li {
-            margin-bottom: 0.75rem;
-            position: relative;
-            padding-left: 1.5rem;
-            color: var(--text-main);
-        }
-        .timeline-item ul li::before {
-            content: '▹';
-            position: absolute;
-            left: 0;
-            color: var(--accent-1);
-            font-weight: bold;
-        }
-
-        /* Camera Shutter Effect for Projects */
-        .shutter-card-container {
-            position: relative;
-            height: 400px;
-            border-radius: 20px;
-            overflow: hidden;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transform: translateZ(0); /* Force hardware acceleration */
-        }
-        
-        .shutter-front {
-            position: absolute;
-            inset: 0;
-            background: var(--shutter-bg);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
-            transition: clip-path 0.7s cubic-bezier(0.77, 0, 0.175, 1);
-            clip-path: circle(150% at 50% 50%);
-            border: 1px solid var(--card-border);
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .shutter-card-container:hover .shutter-front {
-            /* Shrink circle to 0 to reveal content underneath - camera iris effect */
-            clip-path: circle(0% at 50% 50%);
-        }
-
-        .shutter-front h3 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-main);
-            background: linear-gradient(to right, var(--accent-1), var(--accent-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .shutter-front p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-
-        .shutter-content {
-            position: absolute;
-            inset: 0;
+        /* Cards */
+        .card {
             background: var(--card-bg);
-            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
             padding: 2.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            z-index: 5;
-            border: 1px solid var(--accent-1);
-            box-shadow: inset 0 0 50px var(--glow);
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+
+        .card h3 { font-size: 1.8rem; margin-bottom: 1rem; }
+        .card p { color: var(--text-muted); margin-bottom: 1rem; }
         
-        .shutter-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+        /* Pills */
+        .pill-container { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+        .pill {
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            border: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            font-family: var(--font-tech);
+            color: var(--text-main);
         }
 
-        .shutter-content ul {
-            font-size: 0.95rem;
-            list-style: none;
-            margin-top: 1.5rem;
+        /* Experience Timeline */
+        .experience-item { margin-bottom: 3rem; }
+        .exp-header {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            margin-bottom: 1rem;
         }
+        .exp-role { font-family: var(--font-display); font-size: 1.5rem; }
+        .exp-company { color: var(--accent); font-family: var(--font-tech); font-weight: 700; margin-bottom: 1rem; }
+        .exp-date { color: var(--text-muted); font-size: 0.9rem; }
+        .exp-desc li { margin-left: 1.5rem; margin-bottom: 0.5rem; color: var(--text-muted); }
 
-        .shutter-content ul li {
-            margin-bottom: 0.6rem;
-            padding-left: 1.2rem;
-            position: relative;
-        }
-        .shutter-content ul li::before {
-            content: '✦';
-            position: absolute;
-            left: 0;
-            color: var(--accent-2);
-            font-size: 0.8rem;
-            top: 2px;
-        }
+        /* Animations */
+        .reveal { opacity: 0; transform: translateY(30px); }
 
-        /* Interactive Elements - Glowing Cursor */
-        .cursor-glow {
-            width: 30px;
-            height: 30px;
-            background: var(--accent-1);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: screen;
-            filter: blur(8px);
-            transition: width 0.3s, height 0.3s, background-color 0.3s;
-            transform: translate(-50%, -50%);
-            opacity: 0.6;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 3rem 0;
-            border-top: 1px solid var(--card-border);
-            margin-top: 4rem;
-            color: var(--text-muted);
-        }
-        
-        /* Utils */
-        .gsap-reveal {
-            opacity: 0;
-            transform: translateY(40px);
-        }
-
-        /* Responsive adjustments */
+        /* Responsive Nav */
         @media (max-width: 768px) {
-            nav { padding: 1rem 1.5rem; flex-wrap: wrap; justify-content: space-between; }
-            .nav-links { width: 100%; justify-content: center; margin-top: 1rem; gap: 1.5rem; font-size: 0.95rem; }
-            .hero h1 { font-size: 2.5rem; }
-            .container { padding: 0 1.5rem; }
-            .cursor-glow { display: none; } /* Disable custom cursor on mobile */
+            .nav-links { display: none; }
+            nav { padding: 0.75rem 1.5rem; width: 95%; }
+            .hero { padding-top: 150px; }
         }
     </style>
 </head>
-<body class="dark-theme">
+<body>
 
-    <div class="cursor-glow" id="cursorGlow"></div>
-    <div class="ambient-glow" id="ambientGlow"></div>
+    <div class="noise-bg"></div>
 
     <nav>
-        <a href="#home" class="logo">UNNIKRISHNAN</a>
-        <div class="nav-links">
-            <a href="#skills">Skills</a>
-            <a href="#experience">Experience</a>
-            <a href="#projects">Projects</a>
+        <a href="#" class="logo">UNIK.</a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
+                <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+            </button>
+            <a href="resume.pdf" download="Unnikrishnan_Resume.pdf" class="connect-btn">
+                Resume
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            </a>
         </div>
-        <button class="theme-toggle" id="themeToggle">Light Mode</button>
     </nav>
 
     <div class="container">
+        
         <!-- Hero Section -->
-        <section class="hero" id="home">
-            <div class="hero-content" id="heroContent">
-                <h1>U N I K</h1>
-                <h2>AI & Backend Developer</h2>
-                <div class="contact-links">
-                    <a href="resume.pdf" download="Unnikrishnan_Resume.pdf" style="display: flex; align-items: center; gap: 0.5rem; background: var(--accent-1); color: #fff; border-color: var(--accent-1);">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21l-8-9h6v-12h4v12h6l-8 9zm9-1v2h-18v-2h18z"/></svg>
-                        Download Resume
+        <section class="hero" id="about">
+            <div>
+                <p class="tech-text text-accent reveal">Available for work</p>
+                <h1 class="reveal">Building <span style="font-style: italic; color: var(--text-muted);">Intelligent</span><br>Backend Systems.</h1>
+                <p class="subtitle reveal">I'm Unnikrishnan T V, an AI & Backend Developer based in Kochi, India. I specialize in RAG pipelines, LLM integration, and robust FastAPI architectures.</p>
+                
+                <div class="social-row reveal">
+                    <a href="https://github.com/unikodex" target="_blank" class="social-btn" title="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
                     </a>
-                    <a href="mailto:unnik010905@gmail.com" style="display: flex; align-items: center; gap: 0.5rem;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                        unnik010905@gmail.com
+                    <a href="mailto:unnik010905@gmail.com" class="social-btn" title="Email">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                     </a>
-                    <a href="https://github.com/unikodex" target="_blank" style="display: flex; align-items: center; gap: 0.5rem;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                        GitHub
-                    </a>
-                    <a href="#" style="display: flex; align-items: center; gap: 0.5rem;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                        +91-999-5218-295
-                    </a>
+                </div>
+            </div>
+
+            <div class="hero-profile-widget reveal">
+                <div class="hero-profile-text">
+                    <p>Hi! I Am</p>
+                    <h3>Unnikrishnan.</h3>
+                </div>
+                <div class="hero-profile-image-container">
+                    <svg class="dashed-arrow" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 20 Q 50 80 90 50" stroke="var(--text-muted)" stroke-width="2" stroke-dasharray="5 5" stroke-linecap="round" fill="none"/>
+                        <path d="M80 40 L 92 48 L 85 60" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                    <img src="profile.jpg" alt="Unnikrishnan" class="profile-img">
                 </div>
             </div>
         </section>
 
         <!-- Skills Section -->
         <section id="skills">
-            <h2 class="section-title gsap-reveal">Skills Summary</h2>
+            <div class="section-header reveal">
+                <h2>Expertise</h2>
+                <div class="line"></div>
+            </div>
+            
             <div class="grid-2">
-                <div class="glass-card gsap-reveal">
-                    <div class="skills-category">
-                        <h3>AI / ML</h3>
-                        <div class="skill-tags">
-                            <span class="tag">RAG Pipelines</span>
-                            <span class="tag">LLM Integration</span>
-                            <span class="tag">NLP</span>
-                            <span class="tag">Embeddings</span>
-                            <span class="tag">FAISS</span>
-                            <span class="tag">Prompt Engineering</span>
-                            <span class="tag">Llama 3</span>
-                            <span class="tag">Mistral</span>
-                            <span class="tag">phi3:mini</span>
-                        </div>
+                <div class="card reveal">
+                    <h3>AI & Machine Learning</h3>
+                    <p>Building semantic search, RAG pipelines, and integrating state-of-the-art LLMs to solve complex problems.</p>
+                    <div class="pill-container">
+                        <span class="pill">RAG Pipelines</span>
+                        <span class="pill">LLM Integration</span>
+                        <span class="pill">NLP</span>
+                        <span class="pill">FAISS</span>
+                        <span class="pill">Llama 3</span>
+                        <span class="pill">Mistral</span>
                     </div>
                 </div>
                 
-                <div class="glass-card gsap-reveal">
-                    <div class="skills-category">
-                        <h3>Backend & Frontend</h3>
-                        <div class="skill-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">SQL</span>
-                            <span class="tag">FastAPI</span>
-                            <span class="tag">REST APIs</span>
-                            <span class="tag">React.js</span>
-                            <span class="tag">Node.js</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="glass-card gsap-reveal">
-                    <div class="skills-category">
-                        <h3>Tools & Databases</h3>
-                        <div class="skill-tags">
-                            <span class="tag">PostgreSQL</span>
-                            <span class="tag">Git</span>
-                            <span class="tag">Ollama</span>
-                            <span class="tag">Pandas</span>
-                            <span class="tag">NumPy</span>
-                            <span class="tag">Tableau</span>
-                            <span class="tag">AWS Cloud Foundations</span>
-                        </div>
+                <div class="card reveal">
+                    <h3>Backend Architecture</h3>
+                    <p>Designing fast, scalable, and secure APIs and database schemas to power intelligent applications.</p>
+                    <div class="pill-container">
+                        <span class="pill">Python</span>
+                        <span class="pill">FastAPI</span>
+                        <span class="pill">Node.js</span>
+                        <span class="pill">PostgreSQL</span>
+                        <span class="pill">REST APIs</span>
+                        <span class="pill">AWS</span>
                     </div>
                 </div>
             </div>
@@ -560,171 +382,133 @@
 
         <!-- Experience Section -->
         <section id="experience">
-            <h2 class="section-title gsap-reveal">Experience</h2>
-            <div class="glass-card gsap-reveal" style="padding: 3rem;">
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date">Early 2026</div>
-                        <h3>AI and Backend Developer (Intern)</h3>
-                        <h4>Strokx Technologies - Industry Mentored Project</h4>
-                        <ul>
-                            <li><strong>Backend API Development:</strong> Designed and implemented 15+ REST APIs using FastAPI, supporting document ingestion, querying, and response generation for AI systems.</li>
-                            <li><strong>RAG Pipeline Engineering:</strong> Built end-to-end Retrieval-Augmented Generation pipelines processing 1,000+ documents with chunking, embedding generation, and semantic retrieval using FAISS.</li>
-                            <li><strong>LLM Workflow Design:</strong> Integrated Llama 3-based LLM workflows, improving response accuracy and contextual relevance by approximately 35%.</li>
-                            <li><strong>Performance Optimization:</strong> Reduced average query latency by 30% through embedding optimization, efficient indexing, and retrieval tuning.</li>
-                            <li><strong>Scalable System Design:</strong> Engineered backend services capable of handling concurrent users and large document repositories with high availability.</li>
-                        </ul>
+            <div class="section-header reveal">
+                <h2>Experience</h2>
+                <div class="line"></div>
+            </div>
+
+            <div class="card reveal">
+                <div class="experience-item">
+                    <div class="exp-header">
+                        <div>
+                            <div class="exp-role">AI and Backend Developer (Intern)</div>
+                            <div class="exp-company">Strokx Technologies</div>
+                        </div>
+                        <div class="exp-date">Early 2026</div>
                     </div>
+                    <ul class="exp-desc">
+                        <li>Designed and implemented 15+ REST APIs using FastAPI, supporting document ingestion, querying, and response generation.</li>
+                        <li>Built end-to-end RAG pipelines processing 1,000+ documents with chunking, embedding generation, and semantic retrieval using FAISS.</li>
+                        <li>Integrated Llama 3-based LLM workflows, improving response accuracy and contextual relevance by ~35%.</li>
+                        <li>Optimized system performance, reducing average query latency by 30%.</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
         <!-- Projects Section -->
         <section id="projects">
-            <h2 class="section-title gsap-reveal">Projects</h2>
-            <div class="grid-2" style="grid-template-columns: 1fr; max-width: 800px; margin: 0 auto;">
-                <!-- XCalibr Project -->
-                <div class="shutter-card-container gsap-reveal">
-                    <div class="shutter-front">
-                        <h3>XCalibr</h3>
-                        <p>AI-Powered Hiring System</p>
-                        <div class="tag" style="margin-top: 1.5rem; background: var(--card-bg); border-color: var(--accent-2);">Hover to Open Lens</div>
-                    </div>
-                    <div class="shutter-content">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                            <h3 class="outfit">XCalibr</h3>
-                            <a href="https://github.com/jagath-ds/XCalibr-AI-Hiring-System-" target="_blank" style="color: var(--accent-1); text-decoration: none; font-weight: 600;">GitHub ↗</a>
-                        </div>
-                        <p style="color: var(--text-muted); font-size: 0.95rem;">An AI-driven recruitment system.</p>
-                        <ul>
-                            <li><strong>Semantic Candidate Screening:</strong> Evaluates resumes based on semantic similarity using Llama 3, improving accuracy by 40%.</li>
-                            <li><strong>Resume Intelligence Pipeline:</strong> Automated parsing and skill extraction workflows processing 500+ resumes.</li>
-                            <li><strong>Trust Score Validation:</strong> Integrated GitHub and LeetCode APIs to validate technical claims, reducing false-positives by 25%.</li>
-                            <li><strong>Architecture:</strong> Scalable FastAPI backend & React.js Recruiter Dashboard for visualization.</li>
-                        </ul>
-                    </div>
+            <div class="section-header reveal">
+                <h2>Work</h2>
+                <div class="line"></div>
+            </div>
+
+            <div class="card reveal" style="margin-bottom: 2rem;">
+                <p class="tech-text text-accent mb-2">Featured Project</p>
+                <h3 style="font-size: 2.5rem;">XCalibr</h3>
+                <p style="font-size: 1.1rem; max-width: 800px;">An AI-driven recruitment system that evaluates resumes based on semantic similarity. Utilizes Llama 3 to analyze skills and experience against job descriptions, improving candidate-role matching accuracy by 40%.</p>
+                
+                <div class="pill-container" style="margin-bottom: 2rem;">
+                    <span class="pill">FastAPI</span>
+                    <span class="pill">Llama 3</span>
+                    <span class="pill">Semantic Search</span>
+                    <span class="pill">React.js</span>
                 </div>
+                
+                <a href="https://github.com/unikodex" target="_blank" class="connect-btn" style="display: inline-flex; width: auto;">
+                    View Source Code
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                </a>
             </div>
         </section>
 
-        <!-- Education & Certifications -->
-        <section id="education">
+        <!-- Education Section -->
+        <section id="education" style="padding-bottom: 8rem;">
+            <div class="section-header reveal">
+                <h2>Education</h2>
+                <div class="line"></div>
+            </div>
+
             <div class="grid-2">
-                <div class="glass-card gsap-reveal">
-                    <h2 class="outfit" style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--accent-2);">Education</h2>
-                    <h3 style="font-size: 1.3rem;">Amrita Vishwavidhyapeetam</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 1rem;">Kochi, India | Completion in 2028</p>
-                    <p style="font-size: 1.1rem;"><strong>M.C.A - AI & DS; Ongoing</strong></p>
-                    <p style="font-size: 0.9rem; margin-top: 1rem; color: var(--text-muted); border-top: 1px solid var(--card-border); padding-top: 1rem;">
-                        <strong>Courses:</strong> Object-Oriented Programming using Java, Business Analytics and Visualization, Big Data Analytics, Advanced Database Management Systems, Computer Vision, Mathematical Foundations for Computing.
-                    </p>
+                <div class="card reveal">
+                    <h3>Academic</h3>
+                    <div style="margin-bottom: 1.5rem;">
+                        <h4 style="font-family: var(--font-tech); font-size: 1.1rem;">Amrita Vishwavidhyapeetam</h4>
+                        <p class="text-accent" style="font-weight: 500;">M.C.A - AI & DS (Ongoing, 2028)</p>
+                        <p style="font-size: 0.9rem;">Coursework: OOP, Big Data Analytics, Advanced DBMS, Computer Vision, Math Foundations.</p>
+                    </div>
                 </div>
                 
-                <div class="glass-card gsap-reveal">
-                    <h2 class="outfit" style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--accent-2);">Certifications</h2>
-                    <ul style="list-style-position: inside; font-size: 1rem; color: var(--text-main);">
-                        <li style="margin-bottom: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem;">AWS Cloud Foundations</li>
-                        <li style="margin-bottom: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem;">Artificial Intelligence Fundamentals</li>
-                        <li style="margin-bottom: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem;">Python Programming</li>
-                        <li style="margin-bottom: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem;">Data Analysis with Python</li>
-                        <li style="margin-bottom: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem;">Data Visualization Using Power BI</li>
-                        <li>AI Tools and Workflows</li>
+                <div class="card reveal">
+                    <h3>Certifications</h3>
+                    <ul style="list-style: none; color: var(--text-muted);">
+                        <li style="margin-bottom: 0.5rem;">• AWS Cloud Foundations</li>
+                        <li style="margin-bottom: 0.5rem;">• Artificial Intelligence Fundamentals</li>
+                        <li style="margin-bottom: 0.5rem;">• Python Programming & Data Analysis</li>
+                        <li style="margin-bottom: 0.5rem;">• Data Visualization Using Power BI</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <footer>
-            <p>&copy; 2026 Unnikrishnan Thiruvara Variyath. All rights reserved.</p>
-        </footer>
     </div>
 
-    <!-- GSAP for Animations -->
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
+    
     <script>
-        // Theme Toggle
+        // Theme Toggle Logic
         const themeToggle = document.getElementById('themeToggle');
-        const body = document.body;
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        
+        // Check for saved theme preference or system preference
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        // Default to dark mode if no saved preference, to match the vibe, or respect localstorage
+        if(localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && prefersDark)) {
+            document.body.classList.add('dark-mode');
+            sunIcon.style.display = 'block';
+            moonIcon.style.display = 'none';
+        }
 
         themeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-theme');
-            if (body.classList.contains('dark-theme')) {
-                themeToggle.textContent = 'Light Mode';
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            
+            if(isDark) {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
             } else {
-                themeToggle.textContent = 'Dark Mode';
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
             }
         });
 
-        // Custom Cursor & Ambient Glow follow
-        const cursorGlow = document.getElementById('cursorGlow');
-        const ambientGlow = document.getElementById('ambientGlow');
-        
-        let mouseX = window.innerWidth / 2;
-        let mouseY = window.innerHeight / 2;
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            
-            // Fast cursor
-            if(window.innerWidth > 768) {
-                cursorGlow.style.left = mouseX + 'px';
-                cursorGlow.style.top = mouseY + 'px';
-            }
-            
-            // Slow ambient glow
-            ambientGlow.animate({
-                left: mouseX + 'px',
-                top: mouseY + 'px'
-            }, { duration: 4000, fill: "forwards" });
-        });
-
-        // Interactive hover effect on links for cursor
-        const interactives = document.querySelectorAll('a, button, .shutter-card-container, .glass-card, .tag');
-        interactives.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                if(window.innerWidth > 768) {
-                    cursorGlow.style.transform = 'translate(-50%, -50%) scale(2.5)';
-                    cursorGlow.style.background = 'var(--accent-2)';
-                }
-            });
-            el.addEventListener('mouseleave', () => {
-                if(window.innerWidth > 768) {
-                    cursorGlow.style.transform = 'translate(-50%, -50%) scale(1)';
-                    cursorGlow.style.background = 'var(--accent-1)';
-                }
-            });
-        });
-
-        // 3D Movement on Hero Section
-        const hero = document.getElementById('home');
-        const heroContent = document.getElementById('heroContent');
-
-        hero.addEventListener('mousemove', (e) => {
-            if(window.innerWidth > 768) {
-                // Calculate mouse position relative to center of screen
-                const xAxis = (window.innerWidth / 2 - e.pageX) / 30;
-                const yAxis = (window.innerHeight / 2 - e.pageY) / 30;
-                heroContent.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-            }
-        });
-
-        hero.addEventListener('mouseleave', () => {
-            heroContent.style.transform = `rotateY(0deg) rotateX(0deg)`;
-        });
-
-        // GSAP Scroll Animations
+        // GSAP Animations
         gsap.registerPlugin(ScrollTrigger);
 
-        const revealElements = document.querySelectorAll('.gsap-reveal');
+        // Reveal animations on scroll
+        const revealElements = document.querySelectorAll('.reveal');
         
         revealElements.forEach((el) => {
             gsap.to(el, {
                 scrollTrigger: {
                     trigger: el,
-                    start: "top 85%", // Trigger when element is 85% down the viewport
+                    start: "top 85%", // Trigger when the top of the element hits 85% of viewport height
                     toggleActions: "play none none reverse"
                 },
                 opacity: 1,
