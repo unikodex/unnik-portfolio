@@ -124,31 +124,76 @@
         }
         .theme-toggle:hover { background: var(--card-bg); }
 
-        .connect-btn {
-            background: transparent;
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
-            padding: 0.6rem 1.5rem;
-            border-radius: 100px;
-            font-family: var(--font-tech);
-            font-weight: 700;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .connect-btn::before {
-            content: ''; position: absolute; inset: 0;
-            background: var(--accent);
-            z-index: -1;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-        .connect-btn:hover { color: #fff; border-color: var(--accent); }
-        .connect-btn:hover::before { transform: translateY(0); }
+        /* Container for the glowing button */
+.connect-btn {
+    position: relative;
+    display: inline-flex;
+    padding: 1px; /* This defines the thickness of the glowing border */
+    border-radius: 100px;
+    overflow: hidden;
+    text-decoration: none;
+    isolation: isolate;
+    transition: transform 0.3s ease;
+}
+
+.connect-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* The traveling light ray (spinning conic gradient) */
+.connect-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 400%;
+    background: conic-gradient(from 0deg, transparent 60%, var(--accent) 80%, transparent 100%);
+    transform-origin: 0 0;
+    animation: rotate-glow 3s linear infinite;
+    z-index: -2;
+}
+
+/* Ambient outer glow on hover */
+.connect-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 100px;
+    box-shadow: 0 0 20px rgba(255, 77, 0, 0.4);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -3;
+}
+
+.connect-btn:hover::after {
+    opacity: 1;
+}
+
+/* The solid inner mask that blocks the center of the gradient */
+.btn-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg-color); /* Blends perfectly with your black background */
+    color: var(--text-main);
+    padding: 0.6rem 1.5rem;
+    border-radius: 100px;
+    font-family: var(--font-tech);
+    font-weight: 700;
+    z-index: -1;
+    transition: background 0.3s ease;
+}
+
+.connect-btn:hover .btn-inner {
+    background: var(--card-bg); /* Slight lightness shift on hover */
+}
+
+/* Keyframes for the continuous rotation */
+@keyframes rotate-glow {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
 
         /* Container */
         .container {
